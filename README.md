@@ -7,7 +7,7 @@ Supported games today are Battlefield: Bad Company 2, Battlefield 3, Medal of Ho
 Examples
 --------
 
-```
+```python
 from rocketblast.rcon import FrostbiteClient as Client
 
 client = Client('192.0.0.1', 47200, 'secret')
@@ -16,7 +16,7 @@ print serverinfo
 ```
 This example will connect to a server, run the command `serverinfo` and print the result. You will get an array back with the result.
 
-```
+```python
 from rocketblast.rcon import FormatFrostbiteClient as Client
 
 client = Client('192.0.0.1', 47200, 'secret')
@@ -36,5 +36,5 @@ Contribute
 ----------
 The purpose of this repository is to continue to evolve rcon core, making it easier to use and support more games. If you are interested in helping with that feel free to contribute and give feedback.
 
-===License=== 
+### License
 rcon is GNU Affero GPL v3. 
