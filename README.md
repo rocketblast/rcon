@@ -36,5 +36,5 @@ Contribute
 ----------
 The purpose of this repository is to continue to evolve rcon core, making it easier to use and support more games. If you are interested in helping with that feel free to contribute and give feedback.
 
-=== License 
+===License 
 rcon is GNU Affero GPL v3. 
