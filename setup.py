@@ -11,7 +11,7 @@ data_files = [(datadir, [f for f in glob.glob(os.path.join(datadir, '*'))])]
 
 setup(
     name             = 'Rocket Blast RCON',
-    version          = 0.1.1,
+    version          = '0.1.1',
 #    maintainer       = '',
 #    maintainer_email = '',
     author           = 'Martin Danielson',
