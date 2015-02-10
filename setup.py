@@ -10,20 +10,20 @@ datadir = os.path.join('data')
 data_files = [(datadir, [f for f in glob.glob(os.path.join(datadir, '*'))])]
 
 setup(
-    name             = 'Rocket Blast RCON',
-    version          = 0.1.1,
-#    maintainer       = '',
-#    maintainer_email = '',
-    author           = 'Martin Danielson',
-    author_email     = 'martin@rocketblast.com',
+    name = 'Rocket Blast RCON',
+    version = '0.1.1',
+    # maintainer = '',
+    # maintainer_email = '',
+    author = 'Martin Danielson',
+    author_email = 'martin@rocketblast.com',
     long_description = open("README.md").read(),
-    keywords         = 'rcon battlefield game servers socket connection',
-    description      = 'Library to connect to game servers over rcon protcol (Battlefield)',
-    license          = 'GNU Affero GPL v3',
-#    platforms        = '',
-    url              = 'https://github.com/rocketblast/rcon',
-    download_url     = 'https://github.com/rocketblast/rcon/downloads',
-    classifiers      = '',
+    keywords = 'rcon battlefield game servers socket connection',
+    description = 'Library to connect to game servers over rcon protcol (Battlefield)',
+    license = 'GNU Affero GPL v3',
+    # platforms = '',
+    url = 'https://github.com/rocketblast/rcon',
+    download_url = 'https://github.com/rocketblast/rcon/downloads',
+    classifiers = '',
 
     # package installation
     package_dir = package_dir,
