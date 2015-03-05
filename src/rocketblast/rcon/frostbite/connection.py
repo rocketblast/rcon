@@ -10,62 +10,57 @@ from packet import RConPacket
 
 ###################################################################################
 
+
 class SynchronousCommandConnection:
 
-	def __init__(self):
-		self.socket = None
-		
-	def connect(self, host, port):
+    def __init__(self):
+        self.socket = None
 
-		self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-		self.socket.connect((host, port))
-		self.socket.setblocking(1)
+    def connect(self, host, port):
 
-		self.clientSequence = 0
-		self.receiveBuffer = b''
-		self.sentSequence = None
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.socket.connect((host, port))
+        self.socket.setblocking(1)
 
-	def isconnected(self):
-                if self.socket != None:
-                        return True
-                return False
+        self.clientSequence = 0
+        self.receiveBuffer = b''
+        self.sentSequence = None
 
-	def disconnect(self):
-		if self.socket != None:
-			self.socket.close()
-			self.socket = None
+    def isconnected(self):
+        if self.socket != None:
+            return True
+        return False
 
-	# Wait until the local receive buffer contains a full packet (appending data from the network socket),
-	# then split receive buffer into first packet and remaining buffer data
+    def disconnect(self):
+        if self.socket != None:
+            self.socket.close()
+            self.socket = None
 
-	def receive(self, what="response"):
-		while True:
-			while not RConPacket.containsCompletePacket(self.receiveBuffer):
-                                self.receiveBuffer += self.socket.recv(4096)
+    # Wait until the local receive buffer contains a full packet (appending data from the network socket),
+    # then split receive buffer into first packet and remaining buffer data
 
-                        [packet, packetSize] = RConPacket.decode(self.receiveBuffer)
+    def receive(self, what="response"):
+        while True:
+            while not RConPacket.containsCompletePacket(self.receiveBuffer):
+                self.receiveBuffer += self.socket.recv(4096)
 
-			self.receiveBuffer = self.receiveBuffer[packetSize:len(self.receiveBuffer)]
+            [packet, packetSize] = RConPacket.decode(self.receiveBuffer)
 
-                        if what == "response" and packet.isResponse and packet.sequence == self.sentSequence:
-				return packet.words
-                        elif what == "any":
-                        #if not packet.isResponse:
-                                response = RConPacket.createClientResponse(packet.sequence, packet.words)
-                                self.socket.send(response.encode())
+            self.receiveBuffer = self.receiveBuffer[packetSize:len(self.receiveBuffer)]
 
-                                self.sentSequence = self.clientSequence
-                                self.clientSequence = (self.clientSequence + 1) & 0x3fffffff
+            if what == "response" and packet.isResponse and packet.sequence == self.sentSequence:
+                return packet.words
+            elif what == "any":
+                response = RConPacket.createClientResponse(packet.sequence, packet.words)
+                self.socket.send(response.encode())
+                self.sentSequence = self.clientSequence
+                self.clientSequence = (self.clientSequence + 1) & 0x3fffffff
 
-                                return packet.words
-                        # Nytt slut
-			#elif packet.isResponse and packet.sequence == self.sentSequence:
-			#	return packet.words
+                return packet.words
 
-	def send(self, words):
+    def send(self, words):
+        request = RConPacket.createClientRequest(self.clientSequence, words)
+        self.socket.send(request.encode())
 
-		request = RConPacket.createClientRequest(self.clientSequence, words)
-		self.socket.send(request.encode())
-
-		self.sentSequence = self.clientSequence
-		self.clientSequence = (self.clientSequence + 1) & 0x3fffffff
+        self.sentSequence = self.clientSequence
+        self.clientSequence = (self.clientSequence + 1) & 0x3fffffff

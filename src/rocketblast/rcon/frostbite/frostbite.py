@@ -95,73 +95,73 @@ class Client(ClientBase):
 
 
 
-mapFromMOHBuildIdToRelease = { \
-	"576759" : "Open Beta R1", \
-	"582779" : "Open Beta R3", \
-	"586148" : "R4", \
-	"586627" : "R5", \
-	"586981" : "R6", \
-	"587960" : "R7", \
-	"592364" : "R8", \
-	"615937" : "R9", \
-	}
+mapFromMOHBuildIdToRelease = {
+    "576759" : "Open Beta R1",
+    "582779" : "Open Beta R3",
+    "586148" : "R4",
+    "586627" : "R5",
+    "586981" : "R6",
+    "587960" : "R7",
+    "592364" : "R8",
+    "615937" : "R9",
+    }
 
-mapFromBFBC2BuildIdToRelease = { \
-	"581637" : "R22", \
-	"584642" : "R23", \
-	"593485" : "R24", \
-	"602833" : "R25", \
-	"609063" : "R26", \
-	"617877" : "R27", \
-	"621775" : "R28", \
-	"638140" : "R30", \
-	}
+mapFromBFBC2BuildIdToRelease = {
+    "581637": "R22",
+    "584642": "R23",
+    "593485": "R24",
+    "602833": "R25",
+    "609063": "R26",
+    "617877": "R27",
+    "621775": "R28",
+    "638140": "R30",
+}
 
-mapFromBF3BuildIdToRelease = { \
-	"836535" : "Open Beta RB", \
-	"868283" : "Open Beta RC", \
-	"870420" : "Open Beta RD", \
-        "872601" : "Open Beta RE", \
-        "873274" : "Open Beta RF", \
-        "877154" : "Final R1", \
-        "879067" : "Final R2", \
-        "879322" : "Final R3", \
-        "879793" : "Final R4", \
-        "881071" : "Final R5", \
-        "882210" : "Final R6", \
-        "883137" : "Final R7", \
-        "883971" : "Final R8", \
-        "886605" : "Final R9", \
-        "888890" : "Final R10", \
-        "892188" : "Final R11", \
-        "893642" : "Final R12", \
-        "893407" : "Final R13", \
-        "894565" : "Final R14", \
-        "895012" : "Final R15", \
-        "895921" : "Final R16", \
-        "896646" : "Final R17", \
-        "902705" : "Final R18", \
-        "903227" : "Final R19", \
-        "926998" : "Final R20", \
-        "933688" : "Final R21", \
-        "940924" : "Final R22", \
-        "948577" : "Final R23", \
-        "951336" : "Final R24", \
-        "951364" : "Final R25", \
-        "964189" : "Final R26", \
-        "972386" : "Final R27", \
-        "981883" : "Final R28", \
-        "1000930" : "Final R29", \
-        "1009356" : "Final R30", \
-        "1014305" : "Final R31", \
-        "1028652" : "Final R32", \
-        "1055290" : "Final R33", \
-        "1066226" : "Final R34", \
-        "1097264" : "Final R35", \
-        "1125745" : "Final R36", \
+mapFromBF3BuildIdToRelease = {
+    "836535": "Open Beta RB",
+    "868283": "Open Beta RC",
+    "870420": "Open Beta RD",
+    "872601": "Open Beta RE",
+    "873274": "Open Beta RF",
+    "877154": "Final R1",
+    "879067": "Final R2",
+    "879322": "Final R3",
+    "879793": "Final R4",
+    "881071": "Final R5",
+    "882210": "Final R6",
+    "883137": "Final R7",
+    "883971": "Final R8",
+    "886605": "Final R9",
+    "888890": "Final R10",
+    "892188": "Final R11",
+    "893642": "Final R12",
+    "893407": "Final R13",
+    "894565": "Final R14",
+    "895012": "Final R15",
+    "895921": "Final R16",
+    "896646": "Final R17",
+    "902705": "Final R18",
+    "903227": "Final R19",
+    "926998": "Final R20",
+    "933688": "Final R21",
+    "940924": "Final R22",
+    "948577": "Final R23",
+    "951336": "Final R24",
+    "951364": "Final R25",
+    "964189": "Final R26",
+    "972386": "Final R27",
+    "981883": "Final R28",
+    "1000930": "Final R29",
+    "1009356": "Final R30",
+    "1014305": "Final R31",
+    "1028652": "Final R32",
+    "1055290": "Final R33",
+    "1066226": "Final R34",
+    "1097264": "Final R35",
+    "1125745": "Final R36",
+    "1149977": "Final R38",
+}
 
-        "1149977" : "Final R38", \
-        }
 
 class FormatClient(Client):
     def __init__(self, host=None, port=None, password=None, lock=None):
@@ -202,7 +202,6 @@ class FormatClient(Client):
                 self.version = False, "Unknown", 0, "Unknown - " + data[2]
 
         return self.version
-
 
     def serverinfo(self, data, version=None):
         [knownVersion, game, build, version] = version if version else (self.version if self.version else self.versioninfo([]))
@@ -304,7 +303,6 @@ class FormatClient(Client):
                         indices.update(dict({
                             'blazePlayerCount': offset + 0,
                             'blazeGameState': offset + 1}))
-                            
 
             else:
                 indices = dict({
@@ -336,11 +334,11 @@ class FormatClient(Client):
                             'hasGamePassword': offset + 4,
                             'serverUpTime': offset + 5,
                             'roundTime': offset + 6}))
-                    if (game == "BFBC2" and build >= 617877):
+                    if game == "BFBC2" and build >= 617877:
                         indices.update(dict({
                             'gameMod': offset + 7,
                             'mapPack': offset + 8}))
-                    if (game == "BFBC2" and build >= 621775):
+                    if game == "BFBC2" and build >= 621775:
                         indices['externalGameIpAndPort'] = offset + 9
 
             if data is not None:
