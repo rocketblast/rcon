@@ -6,7 +6,7 @@ import logging
 #
 
 import socket
-from packet import RConPacket
+from .packet import RConPacket
 
 ###################################################################################
 

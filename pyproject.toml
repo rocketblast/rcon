@@ -13,3 +13,13 @@ classifiers = [
     "License :: OSI Approved :: GNU Affero GPL v3",
     "Operating System :: OS Independent",
 ]
+
+[tool.setuptools.packages.find]
+
+where = ["."]
+include = ["rocketblast"]
+namespaces = true
+
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"

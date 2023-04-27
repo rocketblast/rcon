@@ -1,6 +1,6 @@
 import logging
 
-from connection import SynchronousCommandConnection as ClientBase
+from .connection import SynchronousCommandConnection as ClientBase
 import socket
 
 import hashlib
