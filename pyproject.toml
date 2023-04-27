@@ -1,0 +1,15 @@
+[project]
+name = "rocketblast-rcon"
+version = "0.2.0"
+authors = [
+  { name="Martin Danielson", email="martin@rocketblast.com" },
+]
+keywords = ["rcon", "battlefield", "game servers", "socket connection"]
+description = "Library to connect to game servers over rcon protcol (Battlefield)"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU Affero GPL v3",
+    "Operating System :: OS Independent",
+]

@@ -1,17 +1,13 @@
-from setuptools import setup, find_packages
+from setuptools import setup, find_namespace_packages
 import os
 import glob
-
-package_dir = {'': 'src'}
-for pkg in [pkg for pkg in find_packages("src") if pkg.find('.') > -1]:
-    package_dir['rocketblast' + "." + pkg] = "src" + os.sep + pkg
 
 datadir = os.path.join('data')
 data_files = [(datadir, [f for f in glob.glob(os.path.join(datadir, '*'))])]
 
 setup(
     name = 'Rocket Blast RCON',
-    version = '0.1.1',
+    version = '0.2.0',
     # maintainer = '',
     # maintainer_email = '',
     author = 'Martin Danielson',
@@ -25,10 +21,7 @@ setup(
     download_url = 'https://github.com/rocketblast/rcon/downloads',
     classifiers = '',
 
-    # package installation
-    package_dir = package_dir,
-    packages = find_packages('src'),
-    namespace_packages = ['rocketblast', 'rocketblast.rcon'],
+    packages=find_namespace_packages(include=['rocketblast.*']),
 
     install_requires = [],
     # uncomment if you have share/data files
