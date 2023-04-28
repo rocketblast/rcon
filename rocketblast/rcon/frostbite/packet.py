@@ -28,12 +28,12 @@ def decodeInt32(data):
 
 def encodeWords(words):
     size = 0
-    encodedWords = ''
+    encodedWords = b''
     for word in words:
         strWord = str(word)
         encodedWords += encodeInt32(len(strWord))
-        encodedWords += strWord
-        encodedWords += '\x00'
+        encodedWords += str.encode(strWord)
+        encodedWords += b'\x00'
         size += len(strWord) + 5
 
     return size, encodedWords
@@ -46,7 +46,7 @@ def decodeWords(size, data):
     while offset < size:
         wordLen = decodeInt32(data[offset : offset + 4])
         word = data[offset + 4 : offset + 4 + wordLen]
-        words.append(word)
+        words.append(word.decode('ascii'))
         offset += wordLen + 5
 
     return words
