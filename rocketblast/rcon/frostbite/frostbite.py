@@ -1,5 +1,6 @@
 import logging
-
+import binascii
+import codecs
 from .connection import SynchronousCommandConnection as ClientBase
 import socket
 
@@ -33,7 +34,7 @@ class Client(ClientBase):
                     #data = self.receive()
 
                     if data[0] == 'OK' and len(data) == 2:
-                        data = self.send(['login.hashed', hashlib.md5(data[1].decode('hex') + password).hexdigest().upper()])
+                        data = self.send(['login.hashed', hashlib.md5(codecs.decode(data[1], 'hex') + password.encode('ascii')).hexdigest().upper()])
                         #data = self.receive()
 
                         if data[0] != 'OK':
